@@ -49,9 +49,12 @@ public class RefactorApplication {
 		System.out.println("안녕");
 		if(args.length < 2)
 			return;
+		String allPerformanceInfo = args[0];
+		String userName = args[1];
+
 		List<Performance> performances = new ArrayList<>();
-		List<String> performancesInfo = List.of(args[0].split(","));
-		Invoice invoices = new Invoice(args[1], performances);
+		List<String> performancesInfo = List.of(allPerformanceInfo.split(","));
+		Invoice invoices = new Invoice(userName, performances);
 		Map<String, Play> plays = new HashMap<>();
 
 		performancesInfo.forEach(a -> {
