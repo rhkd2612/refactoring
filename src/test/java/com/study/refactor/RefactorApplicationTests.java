@@ -25,7 +25,7 @@ class RefactorApplicationTests {
 		return new String[]{"hamlet/Hamlet/tragedy/55,as-like/As You Like It/comedy/35,othello/Othello/tragedy/40", "BigCo"};
 	}
 	private String output1() throws Exception {
-		RefactoringApplication.main(input1());
+		RefactorApplication.main(input1());
 		return outContent.toString();
 	}
 	private String[] expect1(){
