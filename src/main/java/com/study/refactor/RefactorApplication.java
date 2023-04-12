@@ -5,21 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class RefactorApplication {
-	private static class Play {
-		private String name;
-		private String type;
-
-		public Play(String name, String type) {
-			this.name = name;
-			this.type = type;
-		}
-	}
-
 	private static class Invoices{
 		private String customerName;
 		private List<Performances> performances;
@@ -49,7 +38,7 @@ public class RefactorApplication {
 			Play play = plays.get(perf.playId);
 			var thisAmount = 0;
 
-			switch(play.type){
+			switch(play.getType()){
 				case "tragedy":
 					thisAmount = 40000;
 					if(perf.audience > 30){
@@ -68,9 +57,9 @@ public class RefactorApplication {
 			}
 
 			volumeCredits += Math.max(perf.audience - 30, 0);
-			if("comedy".equals(play.type)) volumeCredits += Math.floor(perf.audience / 5);
+			if("comedy".equals(play.getType())) volumeCredits += Math.floor(perf.audience / 5);
 
-			result += play.name + ": " + thisAmount + "원, " + perf.audience + "석\n";
+			result += play.getName() + ": " + thisAmount + "원, " + perf.audience + "석\n";
 			totalAmount += thisAmount;
 		}
 
