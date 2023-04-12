@@ -6,22 +6,12 @@ import java.util.List;
 import java.util.Map;
 
 public class RefactorApplication {
-	private static class Invoices{
-		private String customerName;
-		private List<Performance> performances;
-
-		public Invoices(String customerName, List<Performance> performances) {
-			this.customerName = customerName;
-			this.performances = performances;
-		}
-	}
-
-	public static String statement(Invoices invoice, Map<String, Play> plays) throws Exception {
+	public static String statement(Invoice invoice, Map<String, Play> plays) throws Exception {
 		var totalAmount = 0;
 		var volumeCredits = 0;
-		var result = "청구 내역 고객명 : " + invoice.customerName + '\n';
+		var result = "청구 내역 고객명 : " + invoice.getCustomerName() + '\n';
 
-		for(var perf : invoice.performances){
+		for(var perf : invoice.getPerformances()){
 			Play play = plays.get(perf.getPlayId());
 			var thisAmount = 0;
 
@@ -61,7 +51,7 @@ public class RefactorApplication {
 			return;
 		List<Performance> performances = new ArrayList<>();
 		List<String> performancesInfo = List.of(args[0].split(","));
-		Invoices invoices = new Invoices(args[1], performances);
+		Invoice invoices = new Invoice(args[1], performances);
 		Map<String, Play> plays = new HashMap<>();
 
 		performancesInfo.forEach(a -> {
