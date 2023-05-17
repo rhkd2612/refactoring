@@ -10,20 +10,22 @@ import com.study.refactor.playtype.PerformancePlayType;
 public class RefactorApplication {
 	public static String statement(Invoice invoice, Map<String, Play> plays){
 		var result = new StringBuilder();
-		appendStringsOneLine(result, "청구 내역 고객명 : ", invoice.getCustomerName());
+		result.append(objectsToStrLine(result, "청구 내역 고객명 : ", invoice.getCustomerName()));
 		for(var perf : invoice.getPerformances()) {
 			Play play = plays.get(perf.getPlayId());
-			appendStringsOneLine(result, ": ", play.calculateCurrentAmount(perf), "원, ", perf.getAudience(), "석");
+			result.append(objectsToStrLine( ": ", play.calculateCurrentAmount(perf), "원, ", perf.getAudience(), "석"));
 		}
-		appendStringsOneLine(result, "총액: ", invoice.calculateTotalAmount(plays), "원");
-		appendStringsOneLine(result, "적립 포인트: ", invoice.getVolumeCredits(plays), "점");
+		result.append(objectsToStrLine( "총액: ", invoice.calculateTotalAmount(plays), "원"));
+		result.append(objectsToStrLine( "적립 포인트: ", invoice.getVolumeCredits(plays), "점"));
 		return result.toString();
 	}
 
-	private static void appendStringsOneLine(StringBuilder builder, Object... strings){
+	private static String objectsToStrLine(Object... strings){
+		StringBuilder builder = new StringBuilder();
 		for(var string : strings)
 			builder.append(string);
 		builder.append('\n');
+		return builder.toString();
 	}
 
 	public static void main(String[] args){
