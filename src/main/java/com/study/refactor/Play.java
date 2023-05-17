@@ -14,4 +14,12 @@ public class Play {
         this.name = name;
         this.type = type;
     }
+
+    public PlayType getType(){
+        return this.type.toPlayType();
+    }
+
+    public int calculateCurrentAmount(Performance perf, Play play){
+        return this.type.calculateCurrentAmount(perf, play);
+    }
 }

@@ -16,10 +16,10 @@ public class RefactorApplication {
 
 		for(var perf : invoice.getPerformances()){
 			Play play = plays.get(perf.getPlayId());
-			int thisAmount = play.getType().calculateCurrentAmount(perf, play);
+			int thisAmount = play.calculateCurrentAmount(perf, play);
 
 			volumeCredits += Math.max(perf.getAudience() - 30, 0);
-			if(play.getType().toPlayType() == PlayType.COMEDY)
+			if(play.getType() == PlayType.COMEDY)
 				volumeCredits += Math.floor(perf.getAudience() / 5.0f);
 
 			result.append(play.getName()).append(": ")
