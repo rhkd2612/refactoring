@@ -6,15 +6,12 @@ import java.util.List;
 import com.study.refactor.exception.MyCustomException;
 import com.study.refactor.playtype.PerformancePlayType;
 
-import lombok.Data;
-
 public class RefactorApplication {
     private static class PerformanceForm{
         public String tag;
         public String title;
         public PerformancePlayType type;
         public Integer audience;
-
         public PerformanceForm(String input) {
             String[] split = input.split("/");
             this.tag = split[0];
@@ -27,16 +24,15 @@ public class RefactorApplication {
     public static void main(String[] args) {
         try {
             String performancesText = args[0];
-            String userName = args[1];
-
-            List<Performance> performances = new ArrayList<>();
             List<String> splitPerformancesText = List.of(performancesText.split(","));
+            List<Performance> performances = new ArrayList<>();
             splitPerformancesText.forEach(perf -> {
                 PerformanceForm form = new PerformanceForm(perf);
                 performances.add(new Performance(form.tag, form.audience));
                 PlayLoader.putIfAbsent(form.tag, new Play(form.title, form.type));
             });
 
+            String userName = args[1];
             Invoice invoices = new Invoice(userName, performances);
             System.out.println(statement(invoices));
         } catch(ArrayIndexOutOfBoundsException | IllegalArgumentException e) {
