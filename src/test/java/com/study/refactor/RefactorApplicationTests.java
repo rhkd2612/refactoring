@@ -25,6 +25,7 @@ class RefactorApplicationTests {
 	@Test
 	void statementThrowException() throws Exception {
 		Assertions.assertThrows(ArrayIndexOutOfBoundsException.class, () -> output(input2()));
+		Assertions.assertThrows(ArrayIndexOutOfBoundsException.class, () -> output(input3()));
 	}
 
 	private String[] input1(){
@@ -33,6 +34,10 @@ class RefactorApplicationTests {
 
 	private String[] input2(){
 		return new String[]{"hamlet/Hamlet/tragedy,as-like/As You Like It/comedy/35,othello/Othello/tragedy/40", "BigCo"};
+	}
+
+	private String[] input3(){
+		return new String[]{""};
 	}
 
 	private String output(String[] input) throws Exception {
