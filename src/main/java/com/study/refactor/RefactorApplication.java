@@ -57,7 +57,6 @@ public class RefactorApplication {
 
 		List<Performance> performances = new ArrayList<>();
 		List<String> performancesInfo = List.of(allPerformanceInfo.split(","));
-		Invoice invoices = new Invoice(userName, performances);
 		Map<String, Play> plays = new HashMap<>();
 
 		performancesInfo.forEach(a -> {
@@ -73,6 +72,7 @@ public class RefactorApplication {
 			}
 		});
 
+		Invoice invoices = new Invoice(userName, performances);
 		System.out.println(statement(invoices, plays));
 	}
 
