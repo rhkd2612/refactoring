@@ -26,13 +26,13 @@ public class RefactorApplication {
 
     public static void main(String[] args) {
         try {
-            String allPerformanceInfo = args[0];
+            String performancesText = args[0];
             String userName = args[1];
 
             List<Performance> performances = new ArrayList<>();
-            List<String> performancesInfo = List.of(allPerformanceInfo.split(","));
-            performancesInfo.forEach(a -> {
-                PerformanceForm form = new PerformanceForm(a);
+            List<String> splitPerformancesText = List.of(performancesText.split(","));
+            splitPerformancesText.forEach(perf -> {
+                PerformanceForm form = new PerformanceForm(perf);
                 performances.add(new Performance(form.tag, form.audience));
                 PlayLoader.putIfAbsent(form.tag, new Play(form.title, form.type));
             });
