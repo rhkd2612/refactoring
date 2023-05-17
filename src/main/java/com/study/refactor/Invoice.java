@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.study.refactor.playtype.PlayType;
 
-import static com.study.refactor.Play.playsMap;
+import static com.study.refactor.PlayLoader.playsMap;
 import lombok.Getter;
 
 @Getter

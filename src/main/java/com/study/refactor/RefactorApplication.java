@@ -7,7 +7,7 @@ import java.util.Map;
 
 import com.study.refactor.playtype.PerformancePlayType;
 
-import static com.study.refactor.Play.playsMap;
+import static com.study.refactor.PlayLoader.playsMap;
 
 public class RefactorApplication {
 	public static String statement(Invoice invoice){

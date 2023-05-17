@@ -12,7 +12,6 @@ import lombok.Getter;
 public class Play {
     private final String name;
     private final PerformancePlayType type;
-    public static final Map<String, Play> playsMap = new HashMap<>();
 
     public Play(String name, PerformancePlayType type) {
         this.name = name;
