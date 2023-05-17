@@ -11,16 +11,7 @@ import com.study.refactor.playtype.PlayType;
 public class RefactorApplication {
 	public static String statement(Invoice invoice, Map<String, Play> plays){
 		var totalAmount = 0;
-		var volumeCredits = 0;
-		StringBuilder result = new StringBuilder("청구 내역 고객명 : " + invoice.getCustomerName() + '\n');
-
-		for(var perf : invoice.getPerformances()) {
-			Play play = plays.get(perf.getPlayId());
-			volumeCredits += Math.max(perf.getAudience() - 30, 0);
-			if(play.getType() == PlayType.COMEDY)
-				volumeCredits += Math.floor(perf.getAudience() / 5.0f);
-		}
-
+		var result = new StringBuilder("청구 내역 고객명 : " + invoice.getCustomerName() + '\n');
 		for(var perf : invoice.getPerformances()) {
 			Play play = plays.get(perf.getPlayId());
 			int thisAmount = play.calculateCurrentAmount(perf, play);
@@ -31,6 +22,8 @@ public class RefactorApplication {
 		}
 		result.append("총액: ")
 				.append(totalAmount).append("원\n");
+
+		int volumeCredits = invoice.getVolumeCredits(plays);
 		result.append("적립 포인트: ")
 				.append(volumeCredits).append("점\n");
 		return result.toString();
