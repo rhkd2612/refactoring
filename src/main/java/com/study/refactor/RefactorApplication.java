@@ -9,7 +9,7 @@ import com.study.refactor.playtype.PerformancePlayType;
 import com.study.refactor.playtype.PlayType;
 
 public class RefactorApplication {
-	public static String statement(Invoice invoice, Map<String, Play> plays) throws Exception {
+	public static String statement(Invoice invoice, Map<String, Play> plays){
 		var totalAmount = 0;
 		var volumeCredits = 0;
 		StringBuilder result = new StringBuilder("청구 내역 고객명 : " + invoice.getCustomerName() + '\n');
