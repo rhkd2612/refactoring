@@ -9,15 +9,17 @@ import com.study.refactor.playtype.PerformancePlayType;
 
 public class RefactorApplication {
 	public static String statement(Invoice invoice, Map<String, Play> plays){
-		var totalAmount = 0;
 		var result = new StringBuilder("청구 내역 고객명 : " + invoice.getCustomerName() + '\n');
+		var totalAmount = 0;
 		for(var perf : invoice.getPerformances()) {
 			Play play = plays.get(perf.getPlayId());
-			int thisAmount = play.calculateCurrentAmount(perf, play);
-			totalAmount += thisAmount;
 			result.append(play.getName()).append(": ")
-					.append(thisAmount).append("원, ")
+					.append(play.calculateCurrentAmount(perf, play)).append("원, ")
 					.append(perf.getAudience()).append("석\n");
+		}
+		for(var perf : invoice.getPerformances()) {
+			Play play = plays.get(perf.getPlayId());
+			totalAmount += play.calculateCurrentAmount(perf, play);
 		}
 		result.append("총액: ")
 				.append(totalAmount).append("원\n");
