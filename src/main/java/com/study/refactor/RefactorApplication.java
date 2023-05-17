@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.study.refactor.playtype.PerformancePlayType;
 import com.study.refactor.playtype.PlayType;
 
 public class RefactorApplication {
@@ -15,10 +16,10 @@ public class RefactorApplication {
 
 		for(var perf : invoice.getPerformances()){
 			Play play = plays.get(perf.getPlayId());
-			int thisAmount = calculateCurrentAmount(perf, play);
+			int thisAmount = play.getType().calculateCurrentAmount(perf, play);
 
 			volumeCredits += Math.max(perf.getAudience() - 30, 0);
-			if(play.getType() == PlayType.COMEDY)
+			if(play.getType().toPlayType() == PlayType.COMEDY)
 				volumeCredits += Math.floor(perf.getAudience() / 5.0f);
 
 			result.append(play.getName()).append(": ")
@@ -32,28 +33,6 @@ public class RefactorApplication {
 		result.append("적립 포인트: ")
 				.append(volumeCredits).append("점\n");
 		return result.toString();
-	}
-
-	private static int calculateCurrentAmount(Performance perf, Play play) throws Exception {
-		var result = 0;
-		switch(play.getType()){
-			case TRAGEDY:
-				result = 40000;
-				if(perf.getAudience() > 30){
-					result += 1000 * (perf.getAudience() - 30);
-				}
-				break;
-			case COMEDY:
-				result = 30000;
-				if(perf.getAudience() > 20){
-					result += 10000 + 500 * (perf.getAudience() - 20);
-				}
-				result += 300 * perf.getAudience();
-				break;
-			default:
-				throw new Exception("알 수 없는 장르");
-		}
-		return result;
 	}
 
 	public static void main(String[] args) throws Exception {
@@ -70,12 +49,12 @@ public class RefactorApplication {
 			try {
 				String[] split = a.split("/");
 				String tag = split[0], title = split[1];
-				PlayType type = PlayType.toPlayType(split[2]);
+				PerformancePlayType type = PerformancePlayType.initPerformancePlayType(split[2]);
 				int audience = Integer.parseInt(split[3]);
 
 				performances.add(new Performance(tag, audience));
 				plays.put(tag,new Play(title, type));
-			} catch(ArrayIndexOutOfBoundsException e) {
+			} catch(ArrayIndexOutOfBoundsException | IllegalArgumentException e) {
 				throw e;
 			}
 		});

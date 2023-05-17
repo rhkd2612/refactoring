@@ -1,5 +1,6 @@
 package com.study.refactor;
 
+import com.study.refactor.playtype.PerformancePlayType;
 import com.study.refactor.playtype.PlayType;
 
 import lombok.Getter;
@@ -7,9 +8,9 @@ import lombok.Getter;
 @Getter
 public class Play {
     private String name;
-    private PlayType type;
+    private PerformancePlayType type;
 
-    public Play(String name, PlayType type) {
+    public Play(String name, PerformancePlayType type) {
         this.name = name;
         this.type = type;
     }
