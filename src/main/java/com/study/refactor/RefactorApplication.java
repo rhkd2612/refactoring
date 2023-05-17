@@ -8,6 +8,7 @@ import java.util.Map;
 import com.study.refactor.playtype.PerformancePlayType;
 
 public class RefactorApplication {
+	public static final Map<String, Play> playsMap = new HashMap<>();
 	public static String statement(Invoice invoice, Map<String, Play> plays){
 		var result = new StringBuilder();
 		result.append(objectsToStrLine(result, "청구 내역 고객명 : ", invoice.getCustomerName()));
@@ -36,8 +37,6 @@ public class RefactorApplication {
 
 		List<Performance> performances = new ArrayList<>();
 		List<String> performancesInfo = List.of(allPerformanceInfo.split(","));
-		Map<String, Play> plays = new HashMap<>();
-
 		performancesInfo.forEach(a -> {
 			try {
 				String[] split = a.split("/");
@@ -46,14 +45,14 @@ public class RefactorApplication {
 				int audience = Integer.parseInt(split[3]);
 
 				performances.add(new Performance(tag, audience));
-				plays.put(tag,new Play(title, type));
+				playsMap.putIfAbsent(tag, new Play(title, type));
 			} catch(ArrayIndexOutOfBoundsException | IllegalArgumentException e) {
 				throw e;
 			}
 		});
 
 		Invoice invoices = new Invoice(userName, performances);
-		System.out.println(statement(invoices, plays));
+		System.out.println(statement(invoices, playsMap));
 	}
 
 	private static boolean invalidInput(String[] args) {
