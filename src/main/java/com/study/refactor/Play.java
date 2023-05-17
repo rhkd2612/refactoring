@@ -7,8 +7,8 @@ import lombok.Getter;
 
 @Getter
 public class Play {
-    private String name;
-    private PerformancePlayType type;
+    private final String name;
+    private final PerformancePlayType type;
 
     public Play(String name, PerformancePlayType type) {
         this.name = name;
