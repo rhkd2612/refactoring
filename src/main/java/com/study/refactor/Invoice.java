@@ -1,11 +1,7 @@
 package com.study.refactor;
 
 import java.util.List;
-import java.util.Map;
-
 import com.study.refactor.playtype.PlayType;
-
-import static com.study.refactor.PlayLoader.playsMap;
 import lombok.Getter;
 
 @Getter
@@ -21,7 +17,7 @@ public class Invoice {
     public int getVolumeCredits(){
         var result = 0;
         for(var perf : this.getPerformances()) {
-            Play play = playsMap.get(perf.getPlayId());
+            Play play = PlayLoader.get(perf.getPlayId());
             result += Math.max(perf.getAudience() - 30, 0);
             if(play.getType() == PlayType.COMEDY)
                 result += Math.floor(perf.getAudience() / 5.0f);
@@ -32,7 +28,7 @@ public class Invoice {
     public int calculateTotalAmount(){
         var result = 0;
         for(var perf : this.getPerformances()) {
-            Play play = playsMap.get(perf.getPlayId());
+            Play play = PlayLoader.get(perf.getPlayId());
             result += play.calculateCurrentAmount(perf);
         }
         return result;
