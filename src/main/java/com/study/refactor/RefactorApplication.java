@@ -14,20 +14,21 @@ public class RefactorApplication {
 		var volumeCredits = 0;
 		StringBuilder result = new StringBuilder("청구 내역 고객명 : " + invoice.getCustomerName() + '\n');
 
-		for(var perf : invoice.getPerformances()){
+		for(var perf : invoice.getPerformances()) {
 			Play play = plays.get(perf.getPlayId());
-			int thisAmount = play.calculateCurrentAmount(perf, play);
-
 			volumeCredits += Math.max(perf.getAudience() - 30, 0);
 			if(play.getType() == PlayType.COMEDY)
 				volumeCredits += Math.floor(perf.getAudience() / 5.0f);
+		}
 
+		for(var perf : invoice.getPerformances()) {
+			Play play = plays.get(perf.getPlayId());
+			int thisAmount = play.calculateCurrentAmount(perf, play);
+			totalAmount += thisAmount;
 			result.append(play.getName()).append(": ")
 					.append(thisAmount).append("원, ")
 					.append(perf.getAudience()).append("석\n");
-			totalAmount += thisAmount;
 		}
-
 		result.append("총액: ")
 				.append(totalAmount).append("원\n");
 		result.append("적립 포인트: ")
