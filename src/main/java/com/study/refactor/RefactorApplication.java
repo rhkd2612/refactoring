@@ -6,7 +6,24 @@ import java.util.List;
 import com.study.refactor.exception.MyCustomException;
 import com.study.refactor.playtype.PerformancePlayType;
 
+import lombok.Data;
+
 public class RefactorApplication {
+    private static class PerformanceForm{
+        public String tag;
+        public String title;
+        public PerformancePlayType type;
+        public Integer audience;
+
+        public PerformanceForm(String input) {
+            String[] split = input.split("/");
+            this.tag = split[0];
+            this.title = split[1];
+            this.type = PerformancePlayType.initPerformancePlayType(split[2]);
+            this.audience = Integer.parseInt(split[3]);
+        }
+    }
+
     public static void main(String[] args) {
         try {
             String allPerformanceInfo = args[0];
@@ -15,13 +32,9 @@ public class RefactorApplication {
             List<Performance> performances = new ArrayList<>();
             List<String> performancesInfo = List.of(allPerformanceInfo.split(","));
             performancesInfo.forEach(a -> {
-                String[] split = a.split("/");
-                String tag = split[0], title = split[1];
-                PerformancePlayType type = PerformancePlayType.initPerformancePlayType(split[2]);
-                int audience = Integer.parseInt(split[3]);
-
-                performances.add(new Performance(tag, audience));
-                PlayLoader.putIfAbsent(tag, new Play(title, type));
+                PerformanceForm form = new PerformanceForm(a);
+                performances.add(new Performance(form.tag, form.audience));
+                PlayLoader.putIfAbsent(form.tag, new Play(form.title, form.type));
             });
 
             Invoice invoices = new Invoice(userName, performances);
