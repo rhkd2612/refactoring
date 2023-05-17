@@ -69,7 +69,7 @@ public class RefactorApplication {
 				performances.add(new Performance(tag, audience));
 				plays.put(tag,new Play(title, type));
 			} catch(ArrayIndexOutOfBoundsException e) {
-				System.out.println(e.getMessage());
+				throw e;
 			}
 		});
 
