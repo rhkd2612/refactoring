@@ -23,21 +23,23 @@ public class RefactorApplication {
 
     public static void main(String[] args) {
         try {
-            String performancesText = args[0];
-            List<String> splitPerformancesText = List.of(performancesText.split(","));
-            List<Performance> performances = new ArrayList<>();
-            splitPerformancesText.forEach(perf -> {
-                PerformanceForm form = new PerformanceForm(perf);
-                performances.add(new Performance(form.tag, form.audience));
-                PlayLoader.putIfAbsent(form.tag, new Play(form.title, form.type));
-            });
-
-            String userName = args[1];
-            Invoice invoices = new Invoice(userName, performances);
+            Invoice invoices = new Invoice(args[1], getPerformances(args[0]));
             System.out.println(statement(invoices));
         } catch(ArrayIndexOutOfBoundsException | IllegalArgumentException e) {
+            // TODO ExceptionHandler 추가
             throw new MyCustomException(e.getMessage());
         }
+    }
+
+    private static List<Performance> getPerformances(String performancesText) {
+        List<String> splitPerformancesText = List.of(performancesText.split(","));
+        List<Performance> performances = new ArrayList<>();
+        splitPerformancesText.forEach(perf -> {
+            PerformanceForm form = new PerformanceForm(perf);
+            performances.add(new Performance(form.tag, form.audience));
+            PlayLoader.putIfAbsent(form.tag, new Play(form.title, form.type));
+        });
+        return performances;
     }
 
     public static String statement(Invoice invoice) {
