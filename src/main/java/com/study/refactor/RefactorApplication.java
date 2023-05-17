@@ -30,14 +30,14 @@ public class RefactorApplication {
 
 	private static int calculateCurrentAmount(Performance perf, Play play) throws Exception {
 		var result = 0;
-		switch(play.getType().toString()){
-			case "tragedy":
+		switch(play.getType()){
+			case TRAGEDY:
 				result = 40000;
 				if(perf.getAudience() > 30){
 					result += 1000 * (perf.getAudience() - 30);
 				}
 				break;
-			case "comedy":
+			case COMEDY:
 				result = 30000;
 				if(perf.getAudience() > 20){
 					result += 10000 + 500 * (perf.getAudience() - 20);
