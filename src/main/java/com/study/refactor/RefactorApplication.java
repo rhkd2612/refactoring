@@ -16,7 +16,7 @@ public class RefactorApplication {
 			int thisAmount = calculateCurrentAmount(perf, play);
 
 			volumeCredits += Math.max(perf.getAudience() - 30, 0);
-			if("comedy".equals(play.getType()))
+			if("comedy".equals(play.getType().toString()))
 				volumeCredits += Math.floor(perf.getAudience() / 5.0f);
 
 			result += play.getName() + ": " + thisAmount + "원, " + perf.getAudience() + "석\n";
@@ -30,7 +30,7 @@ public class RefactorApplication {
 
 	private static int calculateCurrentAmount(Performance perf, Play play) throws Exception {
 		var result = 0;
-		switch(play.getType()){
+		switch(play.getType().toString()){
 			case "tragedy":
 				result = 40000;
 				if(perf.getAudience() > 30){
@@ -63,7 +63,8 @@ public class RefactorApplication {
 		performancesInfo.forEach(a -> {
 			try {
 				String[] split = a.split("/");
-				String tag = split[0], title = split[1], type = split[2];
+				String tag = split[0], title = split[1];
+				PlayType type = PlayType.toPlayType(split[2]);
 				int audience = Integer.parseInt(split[3]);
 
 				performances.add(new Performance(tag, audience));

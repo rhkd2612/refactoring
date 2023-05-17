@@ -5,9 +5,9 @@ import lombok.Getter;
 @Getter
 public class Play {
     private String name;
-    private String type;
+    private PlayType type;
 
-    public Play(String name, String type) {
+    public Play(String name, PlayType type) {
         this.name = name;
         this.type = type;
     }
