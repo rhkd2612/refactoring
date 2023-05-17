@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.study.refactor.playtype.PerformancePlayType;
-import com.study.refactor.playtype.PlayType;
 
 public class RefactorApplication {
 	public static String statement(Invoice invoice, Map<String, Play> plays){
@@ -22,14 +21,12 @@ public class RefactorApplication {
 		}
 		result.append("총액: ")
 				.append(totalAmount).append("원\n");
-
-		int volumeCredits = invoice.getVolumeCredits(plays);
 		result.append("적립 포인트: ")
-				.append(volumeCredits).append("점\n");
+				.append(invoice.getVolumeCredits(plays)).append("점\n");
 		return result.toString();
 	}
 
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args){
 		if(invalidInput(args))
 			return;
 		String allPerformanceInfo = args[0];
