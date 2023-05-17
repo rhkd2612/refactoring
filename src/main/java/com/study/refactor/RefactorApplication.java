@@ -16,7 +16,7 @@ public class RefactorApplication {
 			int thisAmount = calculateCurrentAmount(perf, play);
 
 			volumeCredits += Math.max(perf.getAudience() - 30, 0);
-			if("comedy".equals(play.getType().toString()))
+			if(play.getType() == PlayType.COMEDY)
 				volumeCredits += Math.floor(perf.getAudience() / 5.0f);
 
 			result += play.getName() + ": " + thisAmount + "원, " + perf.getAudience() + "석\n";
