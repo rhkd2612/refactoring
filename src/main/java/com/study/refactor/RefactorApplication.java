@@ -9,18 +9,21 @@ import com.study.refactor.playtype.PerformancePlayType;
 
 public class RefactorApplication {
 	public static String statement(Invoice invoice, Map<String, Play> plays){
-		var result = new StringBuilder("청구 내역 고객명 : " + invoice.getCustomerName() + '\n');
+		var result = new StringBuilder();
+		appendStringsOneLine(result, "청구 내역 고객명 : ", invoice.getCustomerName());
 		for(var perf : invoice.getPerformances()) {
 			Play play = plays.get(perf.getPlayId());
-			result.append(play.getName()).append(": ")
-					.append(play.calculateCurrentAmount(perf, play)).append("원, ")
-					.append(perf.getAudience()).append("석\n");
+			appendStringsOneLine(result, ": ", play.calculateCurrentAmount(perf, play), "원, ", perf.getAudience(), "석");
 		}
-		result.append("총액: ")
-				.append(invoice.calculateTotalAmount(plays)).append("원\n");
-		result.append("적립 포인트: ")
-				.append(invoice.getVolumeCredits(plays)).append("점\n");
+		appendStringsOneLine(result, "총액: ", invoice.calculateTotalAmount(plays), "원");
+		appendStringsOneLine(result, "적립 포인트: ", invoice.getVolumeCredits(plays), "점");
 		return result.toString();
+	}
+
+	private static void appendStringsOneLine(StringBuilder builder, Object... strings){
+		for(var string : strings)
+			builder.append(string);
+		builder.append('\n');
 	}
 
 	public static void main(String[] args){
