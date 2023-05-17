@@ -1,5 +1,7 @@
 package com.study.refactor;
 
+import com.study.refactor.playtype.PlayType;
+
 import lombok.Getter;
 
 @Getter

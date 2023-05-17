@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.study.refactor.playtype.PlayType;
+
 public class RefactorApplication {
 	public static String statement(Invoice invoice, Map<String, Play> plays) throws Exception {
 		var totalAmount = 0;
