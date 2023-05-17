@@ -50,8 +50,7 @@ public class RefactorApplication {
 	}
 
 	public static void main(String[] args) throws Exception {
-		System.out.println("안녕");
-		if(args.length < 2)
+		if(invalidInput(args))
 			return;
 		String allPerformanceInfo = args[0];
 		String userName = args[1];
@@ -75,5 +74,9 @@ public class RefactorApplication {
 		});
 
 		System.out.println(statement(invoices, plays));
+	}
+
+	private static boolean invalidInput(String[] args) {
+		return args.length < 2;
 	}
 }
