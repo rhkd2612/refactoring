@@ -23,8 +23,7 @@ public class RefactorApplication {
 
     public static void main(String[] args) {
         try {
-            Invoice invoices = new Invoice(args[1], getPerformances(args[0]));
-            System.out.println(statement(invoices));
+            System.out.println(statement(new Invoice(args[1], getPerformances(args[0]))));
         } catch(ArrayIndexOutOfBoundsException | IllegalArgumentException e) {
             // TODO ExceptionHandler 추가
             throw new MyCustomException(e.getMessage());
