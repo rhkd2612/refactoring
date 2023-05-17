@@ -19,7 +19,7 @@ public class Play {
         return this.type.toPlayType();
     }
 
-    public int calculateCurrentAmount(Performance perf, Play play){
-        return this.type.calculateCurrentAmount(perf, play);
+    public int calculateCurrentAmount(Performance perf){
+        return this.type.calculateCurrentAmount(perf, this);
     }
 }

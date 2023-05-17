@@ -13,7 +13,7 @@ public class RefactorApplication {
 		appendStringsOneLine(result, "청구 내역 고객명 : ", invoice.getCustomerName());
 		for(var perf : invoice.getPerformances()) {
 			Play play = plays.get(perf.getPlayId());
-			appendStringsOneLine(result, ": ", play.calculateCurrentAmount(perf, play), "원, ", perf.getAudience(), "석");
+			appendStringsOneLine(result, ": ", play.calculateCurrentAmount(perf), "원, ", perf.getAudience(), "석");
 		}
 		appendStringsOneLine(result, "총액: ", invoice.calculateTotalAmount(plays), "원");
 		appendStringsOneLine(result, "적립 포인트: ", invoice.getVolumeCredits(plays), "점");

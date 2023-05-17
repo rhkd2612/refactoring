@@ -32,7 +32,7 @@ public class Invoice {
         var result = 0;
         for(var perf : this.getPerformances()) {
             Play play = plays.get(perf.getPlayId());
-            result += play.calculateCurrentAmount(perf, play);
+            result += play.calculateCurrentAmount(perf);
         }
         return result;
     }
