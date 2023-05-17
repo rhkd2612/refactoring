@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.study.refactor.playtype.PlayType;
 
+import static com.study.refactor.Play.playsMap;
 import lombok.Getter;
 
 @Getter
@@ -17,10 +18,10 @@ public class Invoice {
         this.performances = performances;
     }
 
-    public int getVolumeCredits(Map<String, Play> plays){
+    public int getVolumeCredits(){
         var result = 0;
         for(var perf : this.getPerformances()) {
-            Play play = plays.get(perf.getPlayId());
+            Play play = playsMap.get(perf.getPlayId());
             result += Math.max(perf.getAudience() - 30, 0);
             if(play.getType() == PlayType.COMEDY)
                 result += Math.floor(perf.getAudience() / 5.0f);
@@ -28,10 +29,10 @@ public class Invoice {
         return result;
     }
 
-    public int calculateTotalAmount(Map<String, Play> plays){
+    public int calculateTotalAmount(){
         var result = 0;
         for(var perf : this.getPerformances()) {
-            Play play = plays.get(perf.getPlayId());
+            Play play = playsMap.get(perf.getPlayId());
             result += play.calculateCurrentAmount(perf);
         }
         return result;

@@ -7,17 +7,18 @@ import java.util.Map;
 
 import com.study.refactor.playtype.PerformancePlayType;
 
+import static com.study.refactor.Play.playsMap;
+
 public class RefactorApplication {
-	public static final Map<String, Play> playsMap = new HashMap<>();
-	public static String statement(Invoice invoice, Map<String, Play> plays){
+	public static String statement(Invoice invoice){
 		var result = new StringBuilder();
 		result.append(objectsToStrLine(result, "청구 내역 고객명 : ", invoice.getCustomerName()));
 		for(var perf : invoice.getPerformances()) {
-			Play play = plays.get(perf.getPlayId());
+			Play play = playsMap.get(perf.getPlayId());
 			result.append(objectsToStrLine( ": ", play.calculateCurrentAmount(perf), "원, ", perf.getAudience(), "석"));
 		}
-		result.append(objectsToStrLine( "총액: ", invoice.calculateTotalAmount(plays), "원"));
-		result.append(objectsToStrLine( "적립 포인트: ", invoice.getVolumeCredits(plays), "점"));
+		result.append(objectsToStrLine( "총액: ", invoice.calculateTotalAmount(), "원"));
+		result.append(objectsToStrLine( "적립 포인트: ", invoice.getVolumeCredits(), "점"));
 		return result.toString();
 	}
 
@@ -52,7 +53,7 @@ public class RefactorApplication {
 		});
 
 		Invoice invoices = new Invoice(userName, performances);
-		System.out.println(statement(invoices, playsMap));
+		System.out.println(statement(invoices));
 	}
 
 	private static boolean invalidInput(String[] args) {
