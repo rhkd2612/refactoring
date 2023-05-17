@@ -5,11 +5,11 @@ import java.io.PrintStream;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+
+import com.study.refactor.exception.MyCustomException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-//@SpringBootTest
 class RefactorApplicationTests {
 	private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 
@@ -18,14 +18,14 @@ class RefactorApplicationTests {
 	}
 
 	@Test
-	void statement() throws Exception {
+	void statement(){
 		assertThat(output(input1())).contains(expect1());
 	}
 
 	@Test
-	void statementThrowException() throws Exception {
-		Assertions.assertThrows(ArrayIndexOutOfBoundsException.class, () -> output(input2()));
-		Assertions.assertThrows(ArrayIndexOutOfBoundsException.class, () -> output(input3()));
+	void statementThrowException(){
+		Assertions.assertThrows(MyCustomException.class, () -> output(input2()));
+		Assertions.assertThrows(MyCustomException.class, () -> output(input3()));
 	}
 
 	private String[] input1(){
@@ -40,7 +40,7 @@ class RefactorApplicationTests {
 		return new String[]{""};
 	}
 
-	private String output(String[] input) throws Exception {
+	private String output(String[] input){
 		RefactorApplication.main(input);
 		return outContent.toString();
 	}

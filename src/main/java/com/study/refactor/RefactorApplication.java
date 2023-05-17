@@ -3,6 +3,7 @@ package com.study.refactor;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.study.refactor.exception.MyCustomException;
 import com.study.refactor.playtype.PerformancePlayType;
 
 public class RefactorApplication {
@@ -41,13 +42,12 @@ public class RefactorApplication {
 
                 performances.add(new Performance(tag, audience));
                 PlayLoader.putIfAbsent(tag, new Play(title, type));
-
             });
 
             Invoice invoices = new Invoice(userName, performances);
             System.out.println(statement(invoices));
         } catch(ArrayIndexOutOfBoundsException | IllegalArgumentException e) {
-            throw e;
+            throw new MyCustomException(e.getMessage());
         }
     }
 }
