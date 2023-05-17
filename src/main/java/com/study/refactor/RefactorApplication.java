@@ -9,7 +9,7 @@ public class RefactorApplication {
 	public static String statement(Invoice invoice, Map<String, Play> plays) throws Exception {
 		var totalAmount = 0;
 		var volumeCredits = 0;
-		var result = "청구 내역 고객명 : " + invoice.getCustomerName() + '\n';
+		StringBuilder result = new StringBuilder("청구 내역 고객명 : " + invoice.getCustomerName() + '\n');
 
 		for(var perf : invoice.getPerformances()){
 			Play play = plays.get(perf.getPlayId());
@@ -19,13 +19,17 @@ public class RefactorApplication {
 			if(play.getType() == PlayType.COMEDY)
 				volumeCredits += Math.floor(perf.getAudience() / 5.0f);
 
-			result += play.getName() + ": " + thisAmount + "원, " + perf.getAudience() + "석\n";
+			result.append(play.getName()).append(": ")
+					.append(thisAmount).append("원, ")
+					.append(perf.getAudience()).append("석\n");
 			totalAmount += thisAmount;
 		}
 
-		result += "총액: " + totalAmount + "원\n";
-		result += "적립 포인트: " + volumeCredits + "점\n";
-		return result;
+		result.append("총액: ")
+				.append(totalAmount).append("원\n");
+		result.append("적립 포인트: ")
+				.append(volumeCredits).append("점\n");
+		return result.toString();
 	}
 
 	private static int calculateCurrentAmount(Performance perf, Play play) throws Exception {
