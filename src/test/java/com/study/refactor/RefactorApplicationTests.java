@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import com.study.refactor.exception.MyCustomException;
@@ -18,11 +19,13 @@ class RefactorApplicationTests {
 	}
 
 	@Test
+	@DisplayName("정상 케이스")
 	void statement(){
 		assertThat(output(input1())).contains(expect1());
 	}
 
 	@Test
+	@DisplayName("예외 케이스")
 	void statementThrowException(){
 		Assertions.assertThrows(MyCustomException.class, () -> output(input2()));
 		Assertions.assertThrows(MyCustomException.class, () -> output(input3()));
