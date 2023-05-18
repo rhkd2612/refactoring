@@ -44,7 +44,9 @@ public class RefactorApplication {
     public static String statement(Invoice invoice) {
         StringBuilder result = new StringBuilder();
         result.append(objectsToStrLine(result, "청구 내역 고객명 : ", invoice.getCustomerName()));
-        for(var perf : invoice.getPerformances()) {
+
+        List<Performance> performances = invoice.getPerformances();
+        for(var perf : performances) {
             Play play = PlayLoader.get(perf.getPlayId());
             result.append(objectsToStrLine(": ", play.calculateCurrentAmount(perf), "원, ", perf.getAudience(), "석"));
         }
