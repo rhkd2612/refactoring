@@ -1,4 +1,4 @@
-package com.study.refactor;
+package com.study.refactor.performance.play;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package com.study.refactor.performance.playtype;
+package com.study.refactor.performance.play.playtype;
 
 import com.study.refactor.performance.price.ExtraPerformancePrice;
 import com.study.refactor.performance.price.PerformancePrice;

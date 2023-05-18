@@ -1,8 +1,8 @@
-package com.study.refactor;
+package com.study.refactor.performance.play;
 
 import com.study.refactor.performance.Performance;
-import com.study.refactor.performance.playtype.PerformancePlayType;
-import com.study.refactor.performance.playtype.PlayType;
+import com.study.refactor.performance.play.playtype.PerformancePlayType;
+import com.study.refactor.performance.play.playtype.PlayType;
 
 import lombok.Getter;
 

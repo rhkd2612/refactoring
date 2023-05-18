@@ -1,4 +1,4 @@
-package com.study.refactor.performance.playtype;
+package com.study.refactor.performance.play.playtype;
 
 public enum PlayType {
     TRAGEDY,

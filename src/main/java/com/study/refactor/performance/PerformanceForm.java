@@ -1,7 +1,7 @@
 package com.study.refactor.performance;
 
 import com.study.refactor.exception.MyCustomException;
-import com.study.refactor.performance.playtype.PerformancePlayType;
+import com.study.refactor.performance.play.playtype.PerformancePlayType;
 
 public class PerformanceForm {
     public String tag;
