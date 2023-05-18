@@ -3,11 +3,12 @@ package com.study.refactor.playtype;
 import com.study.refactor.Performance;
 import com.study.refactor.Play;
 import com.study.refactor.exception.MyCustomException;
+import com.study.refactor.price.ExtraPerformancePrice;
 import com.study.refactor.price.PerformancePrice;
 
 public abstract class PerformancePlayType {
     protected PerformancePrice base;
-    protected PerformancePrice extra;
+    protected ExtraPerformancePrice extra;
     public PerformancePlayType(){
         setPerformancePrice();
     }

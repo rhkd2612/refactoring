@@ -8,11 +8,11 @@ import com.study.refactor.price.PerformancePrice;
 public class ComedyPlayType extends PerformancePlayType{
     @Override
     public int calculateCurrentAmount(Performance perf, Play play) {
-        int result = 30000;
-        if(perf.getAudience() > 20){
-            result += 10000 + 500 * (perf.getAudience() - 20);
+        int result = this.base.getConstract();
+        if(perf.getAudience() > this.extra.getExtraMinAudience()){
+            result += this.extra.getConstract() + this.extra.getPerAudience() * (perf.getAudience() - this.extra.getExtraMinAudience());
         }
-        result += 300 * perf.getAudience();
+        result += this.base.getPerAudience() * perf.getAudience();
         return result;
     }
 
@@ -24,6 +24,6 @@ public class ComedyPlayType extends PerformancePlayType{
     @Override
     protected void setPerformancePrice() {
         this.base = new PerformancePrice(30000, 300);
-        this.extra = new ExtraPerformancePrice(10000,20,500);
+        this.extra = new ExtraPerformancePrice(10000,500,20);
     }
 }

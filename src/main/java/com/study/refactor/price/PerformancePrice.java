@@ -4,11 +4,11 @@ import lombok.Getter;
 
 @Getter
 public class PerformancePrice {
-    protected final int base;
+    protected final int constract;
     protected final int perAudience;
 
-    public PerformancePrice(int base, int perAudience) {
-        this.base = base;
+    public PerformancePrice(int constract, int perAudience) {
+        this.constract = constract;
         this.perAudience = perAudience;
     }
 }
