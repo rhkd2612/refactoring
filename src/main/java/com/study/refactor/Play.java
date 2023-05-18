@@ -1,10 +1,8 @@
 package com.study.refactor;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import com.study.refactor.playtype.PerformancePlayType;
-import com.study.refactor.playtype.PlayType;
+import com.study.refactor.performance.Performance;
+import com.study.refactor.performance.playtype.PerformancePlayType;
+import com.study.refactor.performance.playtype.PlayType;
 
 import lombok.Getter;
 
@@ -23,6 +21,6 @@ public class Play {
     }
 
     public int calculateCurrentAmount(Performance perf){
-        return this.type.calculateCurrentAmount(perf, this);
+        return this.type.calculateCurrentAmount(perf);
     }
 }

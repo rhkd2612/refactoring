@@ -1,7 +1,7 @@
-package com.study.refactor.playtype;
+package com.study.refactor.performance.playtype;
 
-import com.study.refactor.price.ExtraPerformancePrice;
-import com.study.refactor.price.PerformancePrice;
+import com.study.refactor.performance.price.ExtraPerformancePrice;
+import com.study.refactor.performance.price.PerformancePrice;
 
 public class ComedyPlayType extends PerformancePlayType{
     @Override

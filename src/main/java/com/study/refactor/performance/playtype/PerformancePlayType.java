@@ -1,10 +1,10 @@
-package com.study.refactor.playtype;
+package com.study.refactor.performance.playtype;
 
-import com.study.refactor.Performance;
+import com.study.refactor.performance.Performance;
 import com.study.refactor.Play;
 import com.study.refactor.exception.MyCustomException;
-import com.study.refactor.price.ExtraPerformancePrice;
-import com.study.refactor.price.PerformancePrice;
+import com.study.refactor.performance.price.ExtraPerformancePrice;
+import com.study.refactor.performance.price.PerformancePrice;
 
 public abstract class PerformancePlayType {
     protected PerformancePrice base;
@@ -15,7 +15,7 @@ public abstract class PerformancePlayType {
     public abstract PlayType toPlayType();
     protected abstract void setPerformancePrice();
 
-    public int calculateCurrentAmount(Performance perf, Play play){
+    public int calculateCurrentAmount(Performance perf){
         int result = this.base.getConstract();
         if(perf.getAudience() > this.extra.getExtraMinAudience()){
             result += this.extra.getConstract() + this.extra.getPerAudience() * (perf.getAudience() - this.extra.getExtraMinAudience());

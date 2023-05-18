@@ -1,4 +1,4 @@
-package com.study.refactor.price;
+package com.study.refactor.performance.price;
 
 import lombok.Getter;
 

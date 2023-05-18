@@ -1,9 +1,10 @@
 package com.study.refactor;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import com.study.refactor.playtype.PlayType;
+
+import com.study.refactor.performance.Performance;
+import com.study.refactor.performance.playtype.PlayType;
 import lombok.Getter;
 
 @Getter

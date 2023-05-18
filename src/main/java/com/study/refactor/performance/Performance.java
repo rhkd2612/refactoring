@@ -1,4 +1,4 @@
-package com.study.refactor;
+package com.study.refactor.performance;
 
 import lombok.Getter;
 
