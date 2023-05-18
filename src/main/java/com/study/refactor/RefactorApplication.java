@@ -42,7 +42,7 @@ public class RefactorApplication {
     }
 
     public static String statement(Invoice invoice) {
-        var result = new StringBuilder();
+        StringBuilder result = new StringBuilder();
         result.append(objectsToStrLine(result, "청구 내역 고객명 : ", invoice.getCustomerName()));
         for(var perf : invoice.getPerformances()) {
             Play play = PlayLoader.get(perf.getPlayId());

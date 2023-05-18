@@ -4,8 +4,8 @@ import lombok.Getter;
 
 @Getter
 public class Performance {
-    private String playId;
-    private int audience;
+    private final String playId;
+    private final int audience;
 
     public Performance(String playId, int audience) {
         this.playId = playId;
