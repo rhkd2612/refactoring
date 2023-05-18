@@ -1,7 +1,5 @@
 package com.study.refactor.playtype;
 
-import com.study.refactor.Performance;
-import com.study.refactor.Play;
 import com.study.refactor.price.ExtraPerformancePrice;
 import com.study.refactor.price.PerformancePrice;
 
