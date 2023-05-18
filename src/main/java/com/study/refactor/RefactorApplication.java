@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.study.refactor.exception.MyCustomException;
+import com.study.refactor.handler.MyCustomExceptionHandler;
 import com.study.refactor.playtype.PerformancePlayType;
 
 public class RefactorApplication {
@@ -14,20 +15,28 @@ public class RefactorApplication {
         public Integer audience;
         public PerformanceForm(String input) {
             String[] split = input.split("/");
+            validatePerformanceInput(split);
             this.tag = split[0];
             this.title = split[1];
             this.type = PerformancePlayType.initPerformancePlayType(split[2]);
             this.audience = Integer.parseInt(split[3]);
         }
+
+        private static void validatePerformanceInput(String[] split) {
+            if(split.length < 4)
+                throw new MyCustomException("Invalid Input Performance");
+        }
     }
 
     public static void main(String[] args) {
-        try {
-            System.out.println(statement(new Invoice(args[1], getPerformances(args[0]))));
-        } catch(ArrayIndexOutOfBoundsException | IllegalArgumentException e) {
-            // TODO ExceptionHandler 추가
-            throw new MyCustomException(e.getMessage());
-        }
+        Thread.setDefaultUncaughtExceptionHandler(new MyCustomExceptionHandler());
+        validateArguments(args);
+        System.out.println(statement(new Invoice(args[1], getPerformances(args[0]))));
+    }
+
+    private static void validateArguments(String[] args) {
+        if(args.length < 2)
+            throw new MyCustomException("Invalid Input : Base");
     }
 
     private static List<Performance> getPerformances(String performancesText) {
@@ -43,7 +52,7 @@ public class RefactorApplication {
 
     public static String statement(Invoice invoice) {
         StringBuilder result = new StringBuilder();
-        result.append(objectsToStrLine(result, "청구 내역 고객명 : ", invoice.getCustomerName()));
+        result.append(objectsToStrLine("청구 내역 고객명 : ", invoice.getCustomerName()));
 
         List<Performance> performances = invoice.getPerformances();
         for(var perf : performances) {
