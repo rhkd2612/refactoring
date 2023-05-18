@@ -3,10 +3,17 @@ package com.study.refactor.playtype;
 import com.study.refactor.Performance;
 import com.study.refactor.Play;
 import com.study.refactor.exception.MyCustomException;
+import com.study.refactor.price.PerformancePrice;
 
 public abstract class PerformancePlayType {
+    protected PerformancePrice base;
+    protected PerformancePrice extra;
+    public PerformancePlayType(){
+        setPerformancePrice();
+    }
     public abstract int calculateCurrentAmount(Performance perf, Play play);
     public abstract PlayType toPlayType();
+    protected abstract void setPerformancePrice();
 
     public static PerformancePlayType initPerformancePlayType(String playType){
         if(playType.equals("tragedy"))
