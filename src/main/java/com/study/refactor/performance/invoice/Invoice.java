@@ -1,4 +1,4 @@
-package com.study.refactor;
+package com.study.refactor.performance.invoice;
 
 import java.util.Collections;
 import java.util.List;
