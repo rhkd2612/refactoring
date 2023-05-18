@@ -23,18 +23,7 @@ public class RefactorApplication {
             throw new MyCustomException("Invalid Input : Base");
     }
 
-    private static List<Performance> getPerformances(String performancesText) {
-        List<String> splitPerformancesText = List.of(performancesText.split(","));
-        List<Performance> performances = new ArrayList<>();
-        splitPerformancesText.forEach(perf -> {
-            PerformanceForm form = new PerformanceForm(perf);
-            performances.add(new Performance(form.tag, form.audience));
-            PlayLoader.putIfAbsent(form.tag, new Play(form.title, form.type));
-        });
-        return performances;
-    }
-
-    public static String statement(Invoice invoice) {
+    private static String statement(Invoice invoice) {
         StringBuilder result = new StringBuilder();
         result.append(objectsToStrLine("청구 내역 고객명 : ", invoice.getCustomerName()));
 
@@ -46,6 +35,17 @@ public class RefactorApplication {
         result.append(objectsToStrLine("총액: ", invoice.calculateTotalAmount(), "원"));
         result.append(objectsToStrLine("적립 포인트: ", invoice.getVolumeCredits(), "점"));
         return result.toString();
+    }
+
+    private static List<Performance> getPerformances(String performancesText) {
+        List<String> splitPerformancesText = List.of(performancesText.split(","));
+        List<Performance> performances = new ArrayList<>();
+        splitPerformancesText.forEach(perf -> {
+            PerformanceForm form = new PerformanceForm(perf);
+            performances.add(new Performance(form.tag, form.audience));
+            PlayLoader.putIfAbsent(form.tag, new Play(form.title, form.type));
+        });
+        return performances;
     }
 
     private static String objectsToStrLine(Object... strings) {
