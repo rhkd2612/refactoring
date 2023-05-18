@@ -12,9 +12,17 @@ public abstract class PerformancePlayType {
     public PerformancePlayType(){
         setPerformancePrice();
     }
-    public abstract int calculateCurrentAmount(Performance perf, Play play);
     public abstract PlayType toPlayType();
     protected abstract void setPerformancePrice();
+
+    public int calculateCurrentAmount(Performance perf, Play play){
+        int result = this.base.getConstract();
+        if(perf.getAudience() > this.extra.getExtraMinAudience()){
+            result += this.extra.getConstract() + this.extra.getPerAudience() * (perf.getAudience() - this.extra.getExtraMinAudience());
+        }
+        result += this.base.getPerAudience() * perf.getAudience();
+        return result;
+    }
 
     public static PerformancePlayType initPerformancePlayType(String playType){
         if(playType.equals("tragedy"))
