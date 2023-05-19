@@ -15,7 +15,12 @@ public class RefactorApplication {
     public static void main(String[] args) {
         Thread.setDefaultUncaughtExceptionHandler(new MyCustomExceptionHandler());
         validateArguments(args);
-        System.out.println(statement(new Invoice(args[1], getPerformances(args[0]))));
+
+        List<String> splitPerformancesText = List.of(args[0].split(","));
+        initAllPlays(splitPerformancesText);
+
+        String result = statement(new Invoice(args[1], getPerformances(splitPerformancesText)));
+        System.out.println(result);
     }
 
     private static void validateArguments(String[] args) {
@@ -38,15 +43,20 @@ public class RefactorApplication {
         return result.toString();
     }
 
-    private static List<Performance> getPerformances(String performancesText) {
-        List<String> splitPerformancesText = List.of(performancesText.split(","));
+    private static List<Performance> getPerformances(List<String> splitPerformancesText) {
         List<Performance> performances = new ArrayList<>();
         splitPerformancesText.forEach(perf -> {
             PerformanceForm form = new PerformanceForm(perf);
             performances.add(new Performance(form.tag, form.audience));
-            PlayLoader.putIfAbsent(form.tag, new Play(form.title, form.type));
         });
         return performances;
+    }
+
+    private static void initAllPlays(List<String> splitPerformancesText) {
+        splitPerformancesText.forEach(perf -> {
+            PerformanceForm form = new PerformanceForm(perf);
+            PlayLoader.putIfAbsent(form.tag, new Play(form.title, form.type));
+        });
     }
 
     private static String objectsToStrLine(Object... strings) {
