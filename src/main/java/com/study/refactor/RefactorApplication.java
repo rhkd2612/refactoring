@@ -13,14 +13,25 @@ import com.study.refactor.performance.play.PlayLoader;
 
 public class RefactorApplication {
     public static void main(String[] args) {
-        Thread.setDefaultUncaughtExceptionHandler(new MyCustomExceptionHandler());
+        setCustomExceptionHandler();
         validateArguments(args);
 
-        List<String> splitPerformancesText = List.of(args[0].split(","));
-        initAllPlays(splitPerformancesText);
+        List<String> splitPerformancesText = splitArgsToPerformances(args);
+        putAllPerformancePlayInfos(splitPerformancesText);
+        String invoice = writeInvoice(new Invoice(args[1], collectPerformances(splitPerformancesText)));
+        printInvoice(invoice);
+    }
 
-        String result = statement(new Invoice(args[1], getPerformances(splitPerformancesText)));
-        System.out.println(result);
+    private static void printInvoice(String invoice) {
+        System.out.println(invoice);
+    }
+
+    private static List<String> splitArgsToPerformances(String[] args) {
+        return List.of(args[0].split(","));
+    }
+
+    private static void setCustomExceptionHandler() {
+        Thread.setDefaultUncaughtExceptionHandler(new MyCustomExceptionHandler());
     }
 
     private static void validateArguments(String[] args) {
@@ -28,7 +39,7 @@ public class RefactorApplication {
             throw new MyCustomException("Invalid Input : Base");
     }
 
-    private static String statement(Invoice invoice) {
+    private static String writeInvoice(Invoice invoice) {
         StringBuilder result = new StringBuilder();
         result.append(objectsToStrLine("청구 내역 고객명 : ", invoice.getCustomerName()));
 
@@ -43,7 +54,7 @@ public class RefactorApplication {
         return result.toString();
     }
 
-    private static List<Performance> getPerformances(List<String> splitPerformancesText) {
+    private static List<Performance> collectPerformances(List<String> splitPerformancesText) {
         List<Performance> performances = new ArrayList<>();
         splitPerformancesText.forEach(perf -> {
             PerformanceForm form = new PerformanceForm(perf);
@@ -52,7 +63,7 @@ public class RefactorApplication {
         return performances;
     }
 
-    private static void initAllPlays(List<String> splitPerformancesText) {
+    private static void putAllPerformancePlayInfos(List<String> splitPerformancesText) {
         splitPerformancesText.forEach(perf -> {
             PerformanceForm form = new PerformanceForm(perf);
             PlayLoader.putIfAbsent(form.tag, new Play(form.title, form.type));
