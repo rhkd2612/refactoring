@@ -1,6 +1,5 @@
 package com.study.refactor.performance.play;
 
-import com.study.refactor.performance.Performance;
 import com.study.refactor.performance.play.playtype.PerformancePlayType;
 import com.study.refactor.performance.play.playtype.PlayType;
 
@@ -20,7 +19,7 @@ public class Play {
         return this.type.toPlayType();
     }
 
-    public int calculateCurrentAmount(Performance perf){
-        return this.type.calculateCurrentAmount(perf);
+    public int calculateCurrentAmount(int audienceCount){
+        return this.type.calculateCurrentAmount(audienceCount);
     }
 }

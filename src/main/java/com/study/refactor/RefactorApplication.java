@@ -30,7 +30,8 @@ public class RefactorApplication {
         List<Performance> performances = invoice.getPerformances();
         for(var perf : performances) {
             Play play = PlayLoader.get(perf.getPlayId());
-            result.append(objectsToStrLine(": ", play.calculateCurrentAmount(perf), "원, ", perf.getAudience(), "석"));
+            int audienceCount = perf.getAudienceCount();
+            result.append(objectsToStrLine(": ", play.calculateCurrentAmount(audienceCount), "원, ", audienceCount, "석"));
         }
         result.append(objectsToStrLine("총액: ", invoice.calculateTotalAmount(), "원"));
         result.append(objectsToStrLine("적립 포인트: ", invoice.getVolumeCredits(), "점"));

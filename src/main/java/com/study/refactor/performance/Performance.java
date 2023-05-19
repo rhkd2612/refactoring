@@ -5,10 +5,10 @@ import lombok.Getter;
 @Getter
 public class Performance {
     private final String playId;
-    private final int audience;
+    private final int audienceCount;
 
-    public Performance(String playId, int audience) {
+    public Performance(String playId, int audienceCount) {
         this.playId = playId;
-        this.audience = audience;
+        this.audienceCount = audienceCount;
     }
 }

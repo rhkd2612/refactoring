@@ -1,6 +1,5 @@
 package com.study.refactor.performance.play.playtype;
 
-import com.study.refactor.performance.Performance;
 import com.study.refactor.exception.MyCustomException;
 import com.study.refactor.performance.price.ExtraPerformancePrice;
 import com.study.refactor.performance.price.PerformancePrice;
@@ -14,12 +13,12 @@ public abstract class PerformancePlayType {
     public abstract PlayType toPlayType();
     protected abstract void setPerformancePrice();
 
-    public int calculateCurrentAmount(Performance perf){
+    public int calculateCurrentAmount(int audienceCount){
         int result = this.base.getConstract();
-        if(perf.getAudience() > this.extra.getExtraMinAudience()){
-            result += this.extra.getConstract() + this.extra.getPerAudience() * (perf.getAudience() - this.extra.getExtraMinAudience());
+        if(audienceCount > this.extra.getExtraMinAudience()){
+            result += this.extra.getConstract() + this.extra.getPerAudience() * (audienceCount - this.extra.getExtraMinAudience());
         }
-        result += this.base.getPerAudience() * perf.getAudience();
+        result += this.base.getPerAudience() * audienceCount;
         return result;
     }
 

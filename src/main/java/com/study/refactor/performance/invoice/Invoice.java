@@ -27,9 +27,9 @@ public class Invoice {
         var result = 0;
         for(var perf : this.performances) {
             Play play = PlayLoader.get(perf.getPlayId());
-            result += Math.max(perf.getAudience() - 30, 0);
+            result += Math.max(perf.getAudienceCount() - 30, 0);
             if(play.getType() == PlayType.COMEDY)
-                result += Math.floor(perf.getAudience() / 5.0f);
+                result += Math.floor(perf.getAudienceCount() / 5.0f);
         }
         return result;
     }
@@ -38,7 +38,7 @@ public class Invoice {
         var result = 0;
         for(var perf : this.performances) {
             Play play = PlayLoader.get(perf.getPlayId());
-            result += play.calculateCurrentAmount(perf);
+            result += play.calculateCurrentAmount(perf.getAudienceCount());
         }
         return result;
     }
